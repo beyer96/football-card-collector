@@ -1,85 +1,61 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <form @submit.prevent="validateLogin">
+    <div class="form-wrapper">
+      <div class="input-group">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username">
+      </div>
+      <div class="input-group">
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password">
+      </div>
+      <button type="submit">Login</button>
     </div>
-  </header>
+  </form>
 
-  <RouterView />
+  <div class="form-wrapper">
+    <button type="button" @click.prevent="testProtectedEndpoint">Test protected endpoint</button>
+  </div>
+  <!-- <RouterView /> -->
 </template>
 
+<script setup lang="ts">
+// import { RouterLink, RouterView } from 'vue-router'
+// import HelloWorld from './components/HelloWorld.vue'
+
+const validateLogin = async () => {
+  const username = (document.querySelector("#username") as HTMLInputElement)?.value;
+  const password = (document.querySelector("#password") as HTMLInputElement)?.value;
+  if (!username || !password) return;
+
+  const loginData = { username, password };
+  const response = await fetch("http://localhost:4000/login", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(loginData),
+    credentials: "include"
+  });
+  const data = await response.json();
+
+  console.log(data);
+};
+
+const testProtectedEndpoint = async () => {
+  const response = await fetch("http://localhost:3000", {
+    credentials: "include",
+  });
+  const data = await response.json();
+
+  console.log(data);
+};
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 </style>
