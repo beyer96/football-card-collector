@@ -8,7 +8,7 @@ import mkcert from "vite-plugin-mkcert";
 export default defineConfig({
   plugins: [
     vue(),
-    mkcert()
+    mkcert() // TODO: Probably need to adjust this only for develop environment
   ],
   resolve: {
     alias: {
