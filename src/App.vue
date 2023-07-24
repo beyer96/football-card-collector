@@ -12,9 +12,15 @@
       <button type="submit">Login</button>
     </div>
   </form>
+  
+  <button type="button" @click.prevent="logout">Logout</button>
 
-  <div class="form-wrapper">
+  <div>
     <button type="button" @click.prevent="testProtectedEndpoint">Test protected endpoint</button>
+  </div>
+
+  <div>
+    <button type="button" @click.prevent="testFootballAPI">Test Football API endpoint (fetch czech clubs)</button>
   </div>
   <!-- <RouterView /> -->
 </template>
@@ -41,11 +47,25 @@ const validateLogin = async () => {
 
   console.log(data);
 };
+const logout = async () => {
+  const response = await fetch("http://localhost:4000/logout", {
+    credentials: "include"
+  });
+  console.log(response.status);
+}
 
 const testProtectedEndpoint = async () => {
   const response = await fetch("http://localhost:3000", {
     credentials: "include",
   });
+  const data = await response.json();
+
+  console.log(data);
+};
+
+const testFootballAPI = async () => {
+  const rootURL = "https://football-api-n81o.onrender.com/api/v1";
+  const response = await fetch(`${rootURL}/clubs?nationality=ČESKO`);
   const data = await response.json();
 
   console.log(data);
