@@ -1,7 +1,24 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-image: url("../assets/images/background-net.jpg");
+  background-position: 0 40%;
 
-  .logged-in {
+  &.session {
     background-image: url("../assets/images/background-pitch.jpg");
+    background-position: 0 60%;
+  }
+
+  .body-overlay {
+    background-color: rgba(130, 135, 129, 0.75);
+  
+    &.loading {
+      background-color: rgba(130, 135, 129, 0.85);
+    }
   }
 }
