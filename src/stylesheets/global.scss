@@ -1,8 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 * {
   border: 0;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+input {
+  color: $primary-black;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 400;
 }
 
 body {
@@ -15,6 +36,11 @@ body {
   }
 
   .body-overlay {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgba(130, 135, 129, 0.75);
   
     &.loading {
