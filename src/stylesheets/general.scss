@@ -1,0 +1,27 @@
+.text {
+  &-black {
+    color: $primary-black;
+  }
+  
+  &-green {
+    color: $primary-green;
+  }
+}
+
+.link {
+  &-black {
+    color: $primary-black;
+
+    &:hover {
+      color: $primary-black-hover;
+    }
+  }
+  
+  &-green {
+    color: $primary-green;
+
+    &:hover {
+      color: $primary-green-hover;
+    }
+  }
+}
