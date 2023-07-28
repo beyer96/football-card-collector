@@ -31,6 +31,8 @@ export const useUserStore = defineStore("UserStore", {
   // getters
   getters: {
     getFormattedDate: state => {
+      if (!state.createdAt) return;
+
       const dateStr = state.createdAt;
       const date = new Date((dateStr as string));
       const formattedDate = new Intl.DateTimeFormat("cs-CZ", {
