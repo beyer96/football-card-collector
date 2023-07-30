@@ -21,11 +21,6 @@ export const useUserStore = defineStore("UserStore", {
       this.username = user.username;
       this.createdAt = user.createdAt;
       this.cardIds = user.cardIds;
-    },
-    unsetUser() {
-      this.username = "";
-      this.createdAt = "";
-      this.cardIds = [];
     }
   },
   // getters
