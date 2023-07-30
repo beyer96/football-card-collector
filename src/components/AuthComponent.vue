@@ -1,21 +1,26 @@
 <template>
   <div class="wrapper">
-    <h1>{{ title }}</h1>
+    <h1>{{ FORM_TEXTS[type].title }}</h1>
     <form class="wrapper-form" @submit.prevent="submitCallback">
       <div class="input-group">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Enter your username">
+        <label :for="`${type}-username`">Username</label>
+        <input type="text" name="username" :id="`${type}-username`" :placeholder="FORM_TEXTS[type].placeholders.username" required>
       </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Enter your password">
+      <div v-if="type != 'forgottenPassword'" class="input-group">
+        <label :for="`${type}-password`">Password</label>
+        <input type="password" name="password" :id="`${type}-password`" :placeholder="FORM_TEXTS[type].placeholders.password" minlength="8" required>
+      </div>
+      <div v-if="type == 'register'" class="ínput-group">
+        <label for="repeat-password">Confirm your password</label>
+        <input type="password" name="repeat-password" id="repeat-password" placeholder="Type your password once again" minlength="8" required>
       </div>
       <div class="actions">
-        <button type="submit">Sign in</button>
-        <a href="#" class="link-black">Forgot password?</a>
+        <button type="submit">{{ FORM_TEXTS[type].buttonTitle }}</button>
+        <a v-if="type != 'forgottenPassword'" href="#" class="link-black">Forgot password?</a>
+        <a v-else href="#" class="link-black">Create new account here</a>
         <p>
-          <span>Haven't account yet?</span>
-          <a href="#" class="sign-up link-green">Sign up!</a>
+          <span>{{ FORM_TEXTS[type].ctlText }}</span>
+          <a href="#" @click="$emit('ctlClick', type == 'login' ? 'register' : 'login')" class="ctl-text link-green">{{ FORM_TEXTS[type].ctlText2 }}</a>
         </p>
       </div>
     </form>
@@ -23,10 +28,43 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{
-    title: string,
-    submitCallback: () => void
-  }>()
+defineProps<{
+  type: string
+  submitCallback: () => void
+}>()
+
+const FORM_TEXTS = {
+  login: {
+    title: "Sign in",
+    placeholders: {
+      username: "Enter your username",
+      password: "Enter your password",
+    },
+    buttonTitle: "Sign in",
+    ctlText: "Haven't account yet?",
+    ctlText2: "Sign up!"
+  },
+  register: {
+    title: "Create your account",
+    placeholders:  {
+      username: "Choose your username",
+      password: "At least 8 characters",
+      confirmPassword: "Type your password once again",
+    },
+    buttonTitle: "Kick off my account!",
+    ctlText: "Already have an account?",
+    ctlText2: "Sign in",
+  },
+  forgottenPassword: {
+    title: "Forgotten password",
+    placeholders: {
+      username: "Enter your username",
+    },
+    buttonTitle: "Reset password",
+    ctlText: "Did you remember?",
+    ctlText2: "Sign in",
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -39,13 +77,13 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding: 40px;
+  padding: 25px 40px;
   background-color: #F0F0F0;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
 
   h1 {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   &-form {
@@ -53,7 +91,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
 
     input {
       width: 100%;
@@ -103,7 +141,7 @@
         }
       }
 
-      .sign-up {
+      .ctl-text{
         margin-left: 4px;
       }
     }
