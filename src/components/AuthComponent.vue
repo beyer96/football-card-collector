@@ -19,8 +19,8 @@
         <a v-if="type != 'forgottenPassword'" href="#" class="link-black">Forgot password?</a>
         <a v-else href="#" class="link-black">Create new account here</a>
         <p>
-          <span>{{ FORM_TEXTS[type].ctlText }}</span>
-          <a href="#" @click="$emit('ctlClick', type == 'login' ? 'register' : 'login')" class="ctl-text link-green">{{ FORM_TEXTS[type].ctlText2 }}</a>
+          <span>{{ FORM_TEXTS[type].ctaText }}</span>
+          <a href="#" @click="$emit('ctaClick', type == 'login' ? 'register' : 'login')" class="cta-text link-green">{{ FORM_TEXTS[type].ctaText2 }}</a>
         </p>
       </div>
     </form>
@@ -41,8 +41,8 @@ const FORM_TEXTS = {
       password: "Enter your password",
     },
     buttonTitle: "Sign in",
-    ctlText: "Haven't account yet?",
-    ctlText2: "Sign up!"
+    ctaText: "Haven't account yet?",
+    ctaText2: "Sign up!"
   },
   register: {
     title: "Create your account",
@@ -52,8 +52,8 @@ const FORM_TEXTS = {
       confirmPassword: "Type your password once again",
     },
     buttonTitle: "Kick off my account!",
-    ctlText: "Already have an account?",
-    ctlText2: "Sign in",
+    ctaText: "Already have an account?",
+    ctaText2: "Sign in",
   },
   forgottenPassword: {
     title: "Forgotten password",
@@ -61,8 +61,8 @@ const FORM_TEXTS = {
       username: "Enter your username",
     },
     buttonTitle: "Reset password",
-    ctlText: "Did you remember?",
-    ctlText2: "Sign in",
+    ctaText: "Did you remember?",
+    ctaText2: "Sign in",
   }
 }
 </script>
@@ -141,7 +141,7 @@ const FORM_TEXTS = {
         }
       }
 
-      .ctl-text{
+      .cta-text{
         margin-left: 4px;
       }
     }
