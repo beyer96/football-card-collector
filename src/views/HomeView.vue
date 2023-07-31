@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div class="container">
     <div class="form-wrapper">
       <h1>Welcome, {{ userStore.username }}!</h1>
       <p>Account created: {{ userStore.getFormattedCreatedAt }}</p>
@@ -12,7 +12,7 @@
         <button type="button" @click.prevent="testFootballAPI">Test Football API endpoint (fetch czech clubs)</button>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -27,7 +27,7 @@ const logout = async () => {
     credentials: "include"
   });
 
-  userStore.$reset;
+  userStore.$reset();
   router.push({ path: "/" });
 }
 
