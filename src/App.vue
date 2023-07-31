@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, watch, computed } from 'vue';
 import { RouterLink, RouterView } from 'vue-router';
 import router from './router';
 import { useAppStore } from './stores/AppStore';
@@ -14,6 +14,14 @@ import { getRefreshToken } from './utils/auth';
 
 const appStore = useAppStore();
 const userStore = useUserStore();
+
+const userSession = computed(() => {
+  return !!userStore.username;
+});
+
+watch(userSession, () => {
+  document.body.classList.toggle("session", userSession.value);
+});
 
 onMounted(async () => {
   appStore.setIsLoading(true);
