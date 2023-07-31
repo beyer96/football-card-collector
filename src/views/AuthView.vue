@@ -23,31 +23,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import LoadingSpinner from "../components/LoadingSpinner.vue";
 import AuthComponent from "../components/AuthComponent.vue";
 import { useUserStore } from "../stores/UserStore";
 import { useAppStore } from "../stores/AppStore";
-import { getRefreshToken } from "../utils/auth";
 import router from "../router";
 import { AUTH_SERVER_BASE_URL } from "../utils/constants";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
 const selectedForm = ref("login");
-
-onMounted(async () => {
-  try {
-    const { user } = await getRefreshToken();
-
-    userStore.setUser(user);
-    router.push({ path: "/app" });
-  } catch (err) {
-    console.log(err.message);
-  } finally {
-    appStore.setIsLoading(false);
-  }
-});
 
 const validateLogin = async () => {
   appStore.setIsLoading(true);
