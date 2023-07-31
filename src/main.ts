@@ -7,7 +7,7 @@ import "./stylesheets/main.scss";
 
 import App from "./App.vue";
 import router from "./router";
-import { solidIcons } from "./utils/fontAwesome";
+import { solidIcons } from "./utils/font_awesome";
 
 solidIcons.forEach(icon => library.add(icon));
 
