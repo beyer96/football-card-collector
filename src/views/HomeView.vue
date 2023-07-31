@@ -1,20 +1,18 @@
 <template>
-  <div class="body-overlay">
-    <main>
-      <div class="form-wrapper">
-        <h1>Welcome, {{ userStore.username }}!</h1>
-        <p>Account created: {{ userStore.getFormattedCreatedAt }}</p>
-        <button  type="button" @click.prevent="logout">Logout</button>
-        <div>
-          <button type="button" @click.prevent="testProtectedEndpoint">Test protected endpoint</button>
-        </div>
-
-        <div>
-          <button type="button" @click.prevent="testFootballAPI">Test Football API endpoint (fetch czech clubs)</button>
-        </div>
+  <main>
+    <div class="form-wrapper">
+      <h1>Welcome, {{ userStore.username }}!</h1>
+      <p>Account created: {{ userStore.getFormattedCreatedAt }}</p>
+      <button  type="button" @click.prevent="logout">Logout</button>
+      <div>
+        <button type="button" @click.prevent="testProtectedEndpoint">Test protected endpoint</button>
       </div>
-    </main>
-  </div>
+
+      <div>
+        <button type="button" @click.prevent="testFootballAPI">Test Football API endpoint (fetch czech clubs)</button>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">

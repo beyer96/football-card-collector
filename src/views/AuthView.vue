@@ -1,26 +1,24 @@
 <template>
-  <div class="body-overlay" :class="{ 'loading': isLoading }">
-    <LoadingSpinner v-if="isLoading" />
-    <div v-else>
-      <AuthComponent
-        type="login"
-        :submitCallback=validateLogin
-        class="auth login"
-        :class="{ visible: selectedForm == 'login' }"
-        @ctlClick="(target: string) => selectedForm = target"
-      />
-      <AuthComponent
-        type="register"
-        :submitCallback=registerUser
-        class="auth register"
-        :class="{ visible: selectedForm == 'register' }"
-        @ctlClick="(target: string) => selectedForm = target"
-      />
-      <!-- <AuthComponent
-        type="forgottenPassword"
-        :submitCallback=resetPassword
-      /> -->
-    </div>
+  <LoadingSpinner v-if="appStore.isLoading" />
+  <div v-else>
+    <AuthComponent
+      type="login"
+      :submitCallback=validateLogin
+      class="auth login"
+      :class="{ visible: selectedForm == 'login' }"
+      @ctlClick="(target: string) => selectedForm = target"
+    />
+    <AuthComponent
+      type="register"
+      :submitCallback=registerUser
+      class="auth register"
+      :class="{ visible: selectedForm == 'register' }"
+      @ctlClick="(target: string) => selectedForm = target"
+    />
+    <!-- <AuthComponent
+      type="forgottenPassword"
+      :submitCallback=resetPassword
+    /> -->
   </div>
 </template>
 
@@ -36,7 +34,6 @@ import { AUTH_SERVER_BASE_URL } from "../utils/constants";
 
 const userStore = useUserStore();
 const appStore = useAppStore();
-const isLoading = ref(true);
 const selectedForm = ref("login");
 
 onMounted(async () => {
@@ -48,7 +45,7 @@ onMounted(async () => {
   } catch (err) {
     console.log(err.message);
   } finally {
-    isLoading.value = false;
+    appStore.setIsLoading(false);
   }
 });
 
