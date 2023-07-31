@@ -1,13 +1,15 @@
 <template>
-  <div class="body-overlay" :class="{ 'loading': appStore.isLoading }">
+  <NavBar v-if="userSession" />
+  <div class="body-overlay" :class="{ 'loading': appStore.isLoading, 'bg-transparent': userSession }">
     <RouterView />
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, watch, computed } from 'vue';
-import { RouterLink, RouterView } from 'vue-router';
+import { RouterView } from 'vue-router';
 import router from './router';
+import NavBar from "./components/NavBar.vue";
 import { useAppStore } from './stores/AppStore';
 import { useUserStore } from './stores/UserStore';
 import { getRefreshToken } from './utils/auth';

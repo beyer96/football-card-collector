@@ -27,12 +27,13 @@ h1 {
 }
 
 body {
+  overflow: hidden;
   background-image: url("../assets/images/background-net.jpg");
   background-position: 0 40%;
 
   &.session {
     background-image: url("../assets/images/background-pitch.jpg");
-    background-position: 0 20%;
+    background-position: 0 60%;
   }
 
   .body-overlay {
@@ -54,8 +55,9 @@ body {
     display: flex;
     justify-content: center;
     background: rgba(89, 220, 43, 0.25);
-    margin: 140px 60px 60px;
+    margin: 30px 60px 60px;
     padding: 40px;
     border-radius: 20px;
+    overflow-y: auto;
   }
 }
