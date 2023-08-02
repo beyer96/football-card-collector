@@ -6,14 +6,14 @@
       :submitCallback=validateLogin
       class="auth login"
       :class="{ visible: selectedForm == 'login' }"
-      @ctlClick="(target: string) => selectedForm = target"
+      @ctaClick="(target: string) => selectedForm = target"
     />
     <AuthComponent
       type="register"
       :submitCallback=registerUser
       class="auth register"
       :class="{ visible: selectedForm == 'register' }"
-      @ctlClick="(target: string) => selectedForm = target"
+      @ctaClick="(target: string) => selectedForm = target"
     />
     <!-- <AuthComponent
       type="forgottenPassword"
