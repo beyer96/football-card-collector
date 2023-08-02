@@ -29,6 +29,9 @@ onMounted(async () => {
   appStore.setIsLoading(true);
 
   try {
+    const activeSession = document.cookie.includes("fccSession=true");
+    if (!activeSession) return;
+
     const { user } = await getRefreshToken();
 
     userStore.setUser(user);
