@@ -17,9 +17,7 @@ import { getRefreshToken } from './utils/auth';
 const appStore = useAppStore();
 const userStore = useUserStore();
 
-const userSession = computed(() => {
-  return !!userStore.username;
-});
+const userSession = computed(() => !!userStore.username);
 
 watch(userSession, () => {
   document.body.classList.toggle("session", userSession.value);
