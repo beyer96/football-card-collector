@@ -34,7 +34,7 @@ const testProtectedEndpoint = async () => {
 };
 
 const testFootballAPI = async () => {
-  const rootURL = "https://football-api-n81o.onrender.com/api/v1";
+  const rootURL = "http://localhost:8000/api/v1";
   const response = await fetch(`${rootURL}/clubs?nationality=ČESKO`);
   const data = await response.json();
 
