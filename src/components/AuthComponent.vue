@@ -68,8 +68,6 @@ const FORM_TEXTS = {
 </script>
 
 <style scoped lang="scss">
-@import "../stylesheets/constants.scss";
-
 .wrapper {
   width: 430px;
   height: 525px;

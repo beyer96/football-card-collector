@@ -27,8 +27,6 @@ const logout = async () => {
 </script>
 
 <style scoped lang="scss">
-@import "../stylesheets/constants.scss";
-
 nav {
   width: 100%;
   position: sticky;
