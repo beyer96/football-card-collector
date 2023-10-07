@@ -9,6 +9,7 @@ import App from "./App.vue";
 import router from "./router";
 import { solidIcons } from "./utils/font_awesome";
 import { useUserStore } from "./stores/UserStore";
+import { useAppStore } from "./stores/AppStore";
 import { getRefreshToken } from "./utils/auth";
 
 solidIcons.forEach(icon => library.add(icon));
@@ -19,19 +20,27 @@ app.use(createPinia());
 app.use(router);
 
 const userStore = useUserStore();
+const appStore = useAppStore();
 
 router.beforeEach(async to => {
-  if (to.name !== 'Auth' && !userStore.username) {
-    try {
-      const activeSession = document.cookie.includes("fccSession=true");
-      if (!activeSession) return { name: 'Auth' };
+  appStore.setIsLoading(true);
+  if (to.name == 'Auth' && !userStore.username) {
+    appStore.setIsLoading(false);
 
-      const { user } = await getRefreshToken();
+    return;
+  }
 
-      userStore.setUser(user);
-    } catch (err) {
-      return { name: 'Auth' }
-    }
+  try {
+    const activeSession = document.cookie.includes("fccSession=true");
+    if (!activeSession) return { name: 'Auth' };
+
+    const { user } = await getRefreshToken();
+
+    userStore.setUser(user);
+  } catch (err) {
+    return { name: 'Auth' }
+  } finally {
+    appStore.setIsLoading(false);
   }
 });
 
