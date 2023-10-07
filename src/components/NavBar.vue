@@ -4,6 +4,9 @@
       <RouterLink to="/app">Card<span class="text-green">P</span>itch</RouterLink>
     </div>
     <div class="navigation">
+      <RouterLink to="/app">Home</RouterLink>
+      <RouterLink to="/app/cards">Cards</RouterLink>
+      <RouterLink to="/app/collection">My collection</RouterLink>
       <a @click.prevent="logout">Log out</a>
     </div>
   </nav>
@@ -36,6 +39,10 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 30px 60px;
+
+  .navigation a {
+    margin-left: 30px;
+  }
 
   a {
     color: $white;

@@ -14,8 +14,18 @@ const router = createRouter({
       path: '/app',
       name: 'Home',
       component: () => import('../views/HomeView.vue')
+    },
+    {
+      path: '/app/collection',
+      name: 'MyCollection',
+      component: () => import('../views/MyCollectionView.vue')
+    },
+    {
+      path: '/app/cards',
+      name: 'Cards',
+      component: () => import('../views/CardsView.vue')
     }
   ]
 })
 
-export default router
+export default router;
