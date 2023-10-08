@@ -2,12 +2,16 @@
   <section class="cards-container">
     <h3>{{ header }}</h3>
     <div class="cards">
-      <div class="card" v-for="(card, index) in cards" :key="index">{{ card.name }}</div>
+      <div class="card" v-for="(card, index) in cards" :key="index">
+        <CardComponent />
+      </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+  import CardComponent from './CardComponent.vue';
+
   interface Player {
     id: number,
     name: string
