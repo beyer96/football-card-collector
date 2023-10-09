@@ -44,7 +44,12 @@
   }>();
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+  h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
   .cards {
     display: flex;
     gap: 40px;
