@@ -1,24 +1,22 @@
 <template>
-  <div class="card">
+  <div class="card" :class="`card-type-${Math.round(Math.random()) + 1}`" data-player-id="{{ player.id }}">
     <div class="card-stats-upper">
       <span class="overall">99</span>
       <span class="position">RW</span>
     </div>
     <font-awesome-icon class="player-photo" icon="fa-solid fa-user" />
     <div class="card-stats-lower">
-      <span class="name">Olatunji</span>
-      <div class="divider-vertical"></div>
+      <span class="name">{{ getLastName(player.name) }}</span>
       <div class="stats-detail">
         <div class="left">
-          <span>98 PAC</span>
-          <span>97 SHO</span>
-          <span>88 PAS</span>
+          <span>{{ player.pace }} PAC</span>
+          <span>{{ player.shooting }} SHO</span>
+          <span>{{ player.passing }} PAS</span>
         </div>
-        <div class="divider-horizontal"></div>
         <div class="right">
-          <span>88 DRI</span>
-          <span>98 DEF</span>
-          <span>97 PHY</span>
+          <span>{{ player.dribbling }} DRI</span>
+          <span>{{ player.defending }} DEF</span>
+          <span>{{ player.physicality }} PHY</span>
         </div>
       </div>
     </div>
@@ -26,6 +24,12 @@
 </template>
 
 <script setup lang="ts">
+import { getLastName } from '../utils/helpers';
+import { type Player } from "../../types";
+  
+defineProps<{
+  player: Player
+}>();
 </script>
 
 <style scoped lang="scss">
@@ -33,8 +37,15 @@
     position: relative;
     width: 200px;
     aspect-ratio: 0.7633;
-    background: url("../assets/images/fifa-cards/fifa_card_1.png") no-repeat;
     font-family: "Roboto";
+
+    &-type-1 {
+      background: url("../assets/images/fifa-cards/fifa_card_1.png") no-repeat;
+    }
+
+    &-type-2 {
+      background: url("../assets/images/fifa-cards/fifa_card_2.png") no-repeat;
+    }    
 
     &-stats-upper {
       position: absolute;
@@ -76,12 +87,6 @@
         font-weight: 700;
         padding-bottom: 5px;
         border-bottom: 1px solid black;
-      }
-
-      .divider {
-        &-vertical {
-
-        }
       }
 
       .stats-detail {
